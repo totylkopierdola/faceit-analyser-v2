@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import Image from "next/image";
 import BackgroundShapes from "./components/BackgroundShapes";
@@ -7,18 +7,13 @@ import { Transition } from "@headlessui/react";
 import Link from "next/link";
 import { useState, Fragment, useEffect } from "react";
 import Navbar from "./components/Navbar";
+import SearchForm from "./components/SearchForm/page";
 
 export default function Home() {
-  const handleSearch = (e) => {
-    "use client";
-    e.preventDefault();
-    console.log("searching...");
-  };
+  // const playerData = usePlayerData();
 
   return (
     <div className="relative isolate overflow-hidden bg-gray-900">
-      {/* TAKE API_TOKEN FROM .env.local by process env */}
-
       <BackgroundShapes color="bg-orange-500" opacity="opacity-20" />
 
       <div className="mx-auto px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40 justify-center">
@@ -43,43 +38,8 @@ export default function Home() {
           <p className="mt-6 text-lg leading-8 text-gray-300">
             type the player&apos;s nickname and get the data
           </p>
-
           {/* input */}
-          <form
-            className="w-full max-w-md lg:col-span-5 lg:pt-2"
-            // onSubmit={handleSearch}
-            name="search-form"
-          >
-            <div className="flex flex-col gap-x-4 ">
-              <div className="input-container flex gap-2 mb-2">
-                <label className="sr-only">Email address</label>
-                <input
-                  type="text"
-                  placeholder="Enter player name"
-                  // value={inputNickname}
-                  // onChange={handleInputChange}
-                  className="flex-1 rounded-md bg-gray-800 px-4 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 max-w-56"
-                />
-                <button
-                  type="submit"
-                  className="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                  onClick={handleSearch}
-                >
-                  Search
-                </button>
-              </div>
-
-              <div className="search-results h-52 overflow-y-scroll overflow-x-hidden  max-w-80 no-scrollbar "></div>
-            </div>
-
-            <p className="mt-4 text-sm leading-6 text-gray-300">
-              We care about your data. Read our{" "}
-              <Link href="#" className="font-semibold text-white">
-                privacy&nbsp;policy
-              </Link>
-              .
-            </p>
-          </form>
+          <SearchForm />
         </div>
       </div>
     </div>

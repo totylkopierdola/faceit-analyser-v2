@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import { Play } from "next/font/google";
+import { FaceitDataProvider } from "./providers/index";
 
-const inter = Inter({ subsets: ["latin"] });
+const play = Play({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
+  weight: ["400", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,9 +23,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        {children}
+      <body className={play.className}>
+        <FaceitDataProvider>
+          <Navbar />
+          {children}
+        </FaceitDataProvider>
       </body>
     </html>
   );
