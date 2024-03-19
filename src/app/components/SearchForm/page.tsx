@@ -1,7 +1,5 @@
-// @ts-nocheck
-
 "use client";
-import ReactCountryFlag from "react-country-flag"
+import ReactCountryFlag from "react-country-flag";
 import Link from "next/link";
 import { useState, useEffect, Fragment, useRef } from "react";
 import { useFaceitData } from "../../providers";
@@ -10,14 +8,13 @@ import Image from "next/image";
 import useDebounce from "../../hooks/useDebounce";
 
 const SearchForm = () => {
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { faceitData, fetchPlayerSearch, inputNickname, setInputNickname } =
     useFaceitData();
   const [searchedPlayersData, setSearchedPlayersData] = useState([]);
   const [enterPage, setEnterPage] = useState(false);
 
-
-  const debouncedSearch = useDebounce(inputNickname, 200);
+  const debouncedSearch: string = useDebounce(inputNickname, 500);
 
   useEffect(() => {
     setEnterPage(true);
@@ -26,15 +23,15 @@ const SearchForm = () => {
     }
 
     if (debouncedSearch) {
-      fetchPlayerSearch(debouncedSearch);
+      fetchPlayerSearch();
     }
   }, [debouncedSearch]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputNickname(e.target.value);
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetchPlayerSearch();
   };
@@ -130,7 +127,6 @@ const SearchForm = () => {
                             className="rounded-full p-2"
                             width={45}
                             height={45}
-                            
                             src={
                               player.avatar
                                 ? player.avatar
@@ -142,8 +138,11 @@ const SearchForm = () => {
                         <span>{player.nickname}</span>
 
                         <span>
-                          <ReactCountryFlag className="ml-3 text-xl" countryCode={`${player.country}`} svg />
-
+                          <ReactCountryFlag
+                            className="ml-3 text-xl"
+                            countryCode={`${player.country}`}
+                            svg
+                          />
                         </span>
                       </div>
                     </Link>

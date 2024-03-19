@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import { Play } from "next/font/google";
-import { FaceitDataProvider } from "./providers/index";
+import { FaceitDataProvider } from "./providers";
 
 const play = Play({
   subsets: ["latin"],
