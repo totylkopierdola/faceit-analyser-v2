@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 // "use client";
 
 import Image from "next/image";
@@ -10,13 +12,10 @@ import Navbar from "./components/Navbar";
 import SearchForm from "./components/SearchForm/page";
 
 export default function Home() {
-  // const playerData = usePlayerData();
-
   return (
-    <div className="relative isolate overflow-hidden bg-gray-900">
+    <div className="relative isolate overflow-hidden bg-gray-900 h-[100vh]">
       <BackgroundShapes color="bg-orange-500" opacity="opacity-20" />
-
-      <div className="mx-auto px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40 justify-center">
+      <div className="mx-auto px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-26 justify-center">
         <div className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
           <div className="mt-24 sm:mt-32 lg:mt-16">
             <Link href="#" className="inline-flex space-x-6">
@@ -38,7 +37,6 @@ export default function Home() {
           <p className="mt-6 text-lg leading-8 text-gray-300">
             type the player&apos;s nickname and get the data
           </p>
-          {/* input */}
           <SearchForm />
         </div>
       </div>

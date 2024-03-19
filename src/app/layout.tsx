@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={play.className}>
+      <body className={`${play.className} overflow-hidden`}>
         <FaceitDataProvider>
           <Navbar />
           {children}
