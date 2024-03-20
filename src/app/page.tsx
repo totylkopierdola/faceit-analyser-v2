@@ -9,7 +9,7 @@ import { Transition } from "@headlessui/react";
 import Link from "next/link";
 import { useState, Fragment, useEffect } from "react";
 import Navbar from "./components/Navbar";
-import SearchForm from "./components/SearchForm/page";
+import SearchForm from "./components/SearchForm";
 
 export default function Home() {
   return (
