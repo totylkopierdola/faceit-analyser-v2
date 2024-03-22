@@ -20,7 +20,6 @@ const PlayerDetails = ({ params }: PageProps) => {
 
   return (
     <div>
-      <p onClick={() => console.log(faceitData)}>Player Details</p>
       <li
         key={faceitData.foundPlayerDetails.nickname}
         className="player-details rounded-2xl bg-gray-800 px-8 py-10"

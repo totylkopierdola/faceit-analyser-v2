@@ -1,20 +1,18 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useFaceitData } from "../../providers";
 import { useEffect } from "react";
+import { countTimePostMatch } from "@/app/utils/helpers";
+import { FaExternalLinkAlt } from "react-icons/fa";
+
 
 const PlayerMatches = () => {
-
-  const { faceitData, fetchPlayerData, fetchPlayerLatestMatches } = useFaceitData();
-
+  const { faceitData, fetchPlayerData, fetchMatchesHistory, fetchLatestMatchesPlayerStats } = useFaceitData();
   const faceit_player_id = faceitData.foundPlayerDetails.player_id;
 
-
   useEffect(() => {
-    fetchPlayerLatestMatches(faceit_player_id, 20);
+    fetchMatchesHistory(faceit_player_id, 20);
+    fetchLatestMatchesPlayerStats(faceit_player_id, 20);
   }, [faceit_player_id]);
-
-
 
   return (
     <div className="relative isolate overflow-hidden  py-10 px-80">
@@ -34,7 +32,7 @@ const PlayerMatches = () => {
         </p>
       </div>
 
-      {faceitData.lastMatches.items && (
+      {faceitData.matchLatestStats?.items && (
         <div className="w-full mt-12">
           {/* <div className="overflow-auto"> */}
           <div className="">
@@ -96,8 +94,8 @@ const PlayerMatches = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
-                {faceitData.lastMatches.items.map((match, matchIndex) => (
-                  <tr key={`matchIndex`}>
+                {faceitData.matchLatestStats.items.map((match, matchIndex) => (
+                  <tr key={matchIndex} >
                     <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
                       <div className="flex items-center ">
                         {match?.stats?.Result === "1" ? (
@@ -109,8 +107,11 @@ const PlayerMatches = () => {
                             <div className="h-1.5 w-1.5 rounded-full bg-current"></div>
                           </div>
                         )}
-                        <div className="truncate text-sm leading-6 text-white font-extrabold">
-                          {`match.stats.Team`}
+                        <div className="truncate text-sm leading-6 text-white font-extrabold flex items-center gap-2">
+                          {match.stats.Team}
+                          <Link href="https://www.faceit.com/en/cs2/room/1-916138f3-dd58-46e0-8d77-5143c64b47c2" passHref target="_blank">
+                            <FaExternalLinkAlt className="cursor-pointer" />
+                          </Link>
                         </div>
                       </div>
                     </td>
@@ -120,35 +121,35 @@ const PlayerMatches = () => {
                           className="bg-green-500/70
                           rounded-md min-w-[55px] text-center  px-2 py-1 text-xs text-black font-medium ring-1 ring-inset ring-white/10"
                         >
-                          {`match.stats.Score`}
+                          {match.stats.Score}
                         </div>
                       </div>
                     </td>
                     <td className="relative hidden py-4 pl-0 pr-8 text-sm leading-6 text-green-400 md:table-cell lg:pr-20">
-                      {`match.stats.Kills`}
+                      {match.stats.Kills}
                     </td>
                     <td className="hidden py-4 pl-0 pr-8 text-sm leading-6 text-yellow-400 md:table-cell lg:pr-20">
-                      {`match.stats.Assists`}
+                      {match.stats.Assists}
                     </td>
                     <td className="hidden py-4 pl-0 pr-8 text-sm leading-6 text-red-400 md:table-cell lg:pr-20">
-                      {`match.stats.Deaths`}
+                      {match.stats.Deaths}
                     </td>
                     <td className="hidden py-4 pl-0 pr-8 text-sm leading-6 text-white md:table-cell lg:pr-20">
-                      {`match.stats["K/R Ratio"]`}
+                      {match.stats["K/R Ratio"]}
                     </td>
                     <td className="hidden py-4 pl-0 pr-8 text-sm leading-6 text-white md:table-cell lg:pr-20">
-                      {`match.stats["K/D Ratio"]`}
+                      {match.stats["K/D Ratio"]}
                     </td>
                     <td className="hidden py-4 pl-0 pr-8 text-sm leading-6 text-white md:table-cell lg:pr-20">
-                      {`match.stats["Headshots %"]`}
-                    </td>
-
-                    <td className="hidden py-4 pl-0 pr-8 text-sm leading-6 text-white md:table-cell lg:pr-20">
-                      {`match.stats["Map"]`}
+                      {match.stats["Headshots %"]}
                     </td>
 
                     <td className="hidden py-4 pl-0 pr-8 text-sm leading-6 text-white md:table-cell lg:pr-20">
-                      {`countTimePostMatch(match.stats["Updated At"])`}
+                      {match.stats["Map"]}
+                    </td>
+
+                    <td className="hidden py-4 pl-0 pr-8 text-sm leading-6 text-white md:table-cell lg:pr-20">
+                      {countTimePostMatch(match.stats["Updated At"])}
                     </td>
                   </tr>
                 ))}

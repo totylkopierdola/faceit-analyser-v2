@@ -1,35 +1,12 @@
 interface FaceitDataContextType {
-  // const fetchPlayerSearch = async (nickname: string) => {
-  //   if (inputNickname || nickname) {
-  //     try {
-  //       const response: AxiosResponse = await axios.get(
-  //         `https://open.faceit.com/data/v4/search/players?nickname=${
-  //           inputNickname || nickname
-  //         }&offset=0&limit=20`,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${API_TOKEN}`,
-  //           },
-  //         }
-  //       );
-  //       setFaceitData((prevData) => ({
-  //         ...prevData,
-  //         searchPlayerList: response.data,
-  //       }));
-  //       console.log("raz");
-  //     } catch (error) {
-  //       setFaceitData((prevData) => ({
-  //         ...prevData,
-  //       }));
-  //       throw new Error("There was an error fetching the data");
-  //     }
-  //   }
-  // };
-  fetchPlayerSearch: (nickname: string) => Promise<void>;
-  fetchPlayerData: (nickname: string) => Promise<void>;
-  faceitData: FaceitDataState;
+  faceitData: any;
   inputNickname: string;
   setInputNickname: React.Dispatch<React.SetStateAction<string>>;
+  fetchPlayerSearch: (nickname: string) => Promise<void>;
+  fetchPlayerData: (nickname: string) => Promise<void>;
+  fetchMatchesHistory: (player_id: string, limit: number) => Promise<void>;
+  fetchLatestMatchesPlayerStats: (player_id: string, limit: number) => Promise<void>;
+
 }
 
 interface PlayerSearchResponse {
@@ -54,10 +31,12 @@ interface SearchPlayerList {
   start: number;
 }
 
-interface FaceitDataState {
-  searchPlayerList: SearchPlayerList;
-  foundPlayerDetails: PlayerDetails;
-}
+// interface FaceitDataState {
+//   searchPlayerList: SearchPlayerList;
+//   foundPlayerDetails: PlayerDetails;
+//   matchHistory: MatchHistory;
+//   matchLatestStats: MatchHistory;
+// }
 
 interface PageProps {
   params: {
@@ -102,4 +81,57 @@ interface PlayerDetails {
   steam_nickname: string;
   verified: boolean;
 
+}
+
+interface MatchHistory {
+  end: number;
+  from: number;
+  items: LastMatch[];
+  start: number;
+  to: number;
+
+}
+
+interface LastMatch {
+  competition_id: string;
+  competition_name: string;
+  competition_type: string;
+  faceit_url: string;
+  finished_at: number;
+  game_id: string;
+  game_mode: string;
+  match_id: string;
+  match_type: string;
+  max_players: number;
+  organizer_id: string;
+  playing_players: string[];
+  region: string;
+  results: {
+    score: {
+      [key: string]: number;
+    };
+    winner: string;
+  };
+  started_at: number;
+  status: string;
+  teams: {
+    [key: string]: {
+      avatar: string;
+      nickname: string;
+      players: [
+        {
+          avatar: string;
+          faceit_url: string;
+          game_player_id: string;
+          game_player_name: string;
+          nickname: string;
+          player_id: string;
+          skill_level: number;
+        }
+      ]
+      team_id: string;
+      type: string;
+    };
+  };
+  teams_size: number;
 }

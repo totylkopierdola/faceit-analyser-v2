@@ -1,10 +1,8 @@
 "use client";
-
 import {
   createContext,
   useContext,
   useState,
-  useEffect,
   ReactNode,
 } from "react";
 import axios, { AxiosResponse } from "axios";
@@ -16,7 +14,9 @@ const FaceitDataContext = createContext<FaceitDataContextType>({
   setInputNickname: () => { },
   fetchPlayerSearch: async () => { },
   fetchPlayerData: async () => { },
-  fetchPlayerLatestMatches: async () => { },
+  fetchMatchesHistory: async () => { },
+  fetchLatestMatchesPlayerStats: async () => { },
+  fetchPlayerFulltimeStats: async () => { }
 });
 
 export const useFaceitData = () => useContext(FaceitDataContext);
@@ -27,10 +27,11 @@ interface FaceitDataProviderProps {
 
 export const FaceitDataProvider = ({ children }: FaceitDataProviderProps) => {
   const [inputNickname, setInputNickname] = useState("");
-  const [faceitData, setFaceitData] = useState<FaceitDataState>({
+  const [faceitData, setFaceitData] = useState({
     searchPlayerList: {},
     foundPlayerDetails: {},
-    lastMatches: [],
+    matchHistory: [],
+    matchLatestStats: [],
   });
 
   const fetchPlayerSearch = async (nickname: string) => {
@@ -49,7 +50,6 @@ export const FaceitDataProvider = ({ children }: FaceitDataProviderProps) => {
           ...prevData,
           searchPlayerList: response.data,
         }));
-        console.log("raz");
       } catch (error) {
         setFaceitData((prevData) => ({
           ...prevData,
@@ -69,8 +69,6 @@ export const FaceitDataProvider = ({ children }: FaceitDataProviderProps) => {
           },
         }
       );
-      console.log("dwa");
-      console.log(response.data);
       setFaceitData((prevData) => ({
         ...prevData,
         foundPlayerDetails: response.data,
@@ -83,7 +81,7 @@ export const FaceitDataProvider = ({ children }: FaceitDataProviderProps) => {
 
   };
 
-  const fetchPlayerLatestMatches = async (faceit_player_id, limit) => {
+  const fetchMatchesHistory = async (faceit_player_id: string, limit: Number) => {
     if (faceit_player_id) {
       try {
         const response = await axios.get(
@@ -97,11 +95,9 @@ export const FaceitDataProvider = ({ children }: FaceitDataProviderProps) => {
           }
         );
 
-        console.log('trzy', response.data);
-
         setFaceitData((prevData) => ({
           ...prevData,
-          lastMatches: response.data,
+          matchHistory: response.data,
         }));
       } catch (error) {
         throw new Error("There was an error fetching the data");
@@ -110,9 +106,58 @@ export const FaceitDataProvider = ({ children }: FaceitDataProviderProps) => {
 
   };
 
+  const fetchLatestMatchesPlayerStats = async (faceit_player_id: string, limit: Number) => {
+    if (faceit_player_id) {
+      try {
+        const response = await axios.get(
+          `https://open.faceit.com/data/v4/players/${faceit_player_id}/games/cs2/stats?offset=0&limit=${limit}
+          `,
+          {
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${API_TOKEN}`,
+            },
+          }
+        );
+
+        setFaceitData((prevData) => ({
+          ...prevData,
+          matchLatestStats: response.data,
+        }));
+      } catch (error) {
+        throw new Error("There was an error fetching the data");
+      }
+    }
+  }
+
+  const fetchPlayerFulltimeStats = async (faceit_player_id: string) => {
+    if (faceit_player_id) {
+      try {
+        const response = await axios.get(
+          `https://open.faceit.com/data/v4/players/${faceit_player_id}/stats/cs2`,
+          {
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${API_TOKEN}`,
+            }
+          }
+        );
+        console.log('pięć', response.data);
+        setFaceitData((prevData) => ({
+          ...prevData,
+          fullTimeStats: response.data,
+        }));
+      } catch (error) {
+        throw new Error("There was an error fetching the data");
+      }
+    }
+  }
+
+
+
   return (
     <FaceitDataContext.Provider
-      value={{ fetchPlayerSearch, fetchPlayerData, fetchPlayerLatestMatches, faceitData, inputNickname, setInputNickname }}
+      value={{ fetchPlayerSearch, fetchPlayerData, fetchMatchesHistory, fetchLatestMatchesPlayerStats, faceitData, inputNickname, setInputNickname, fetchPlayerFulltimeStats }}
     >
       {children}
     </FaceitDataContext.Provider>

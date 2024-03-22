@@ -1,3 +1,4 @@
 {
+  "plugins": "filenames",
   "extends": "next/core-web-vitals"
 }
