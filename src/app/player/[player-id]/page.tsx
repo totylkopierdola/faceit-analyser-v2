@@ -1,21 +1,9 @@
-"use client";
 import BackgroundShapes from "@/app/components/BackgroundShapes";
-import Link from "next/link";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-// import { usePlayerData } from "../hooks/PlayerDataContext";
-import Image from "next/image";
 import PlayerDetails from "@/app/components/PlayerDetails";
 import PlayerMatches from "@/app/components/PlayerMatches";
 import PlayerStats from "@/app/components/PlayerStats";
-// import { formatDate, countTimePostMatch, classNames } from "../utils/helpers";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const page = ({ params }: PageProps) => {
-  const classNames = (...classes: any[]) => {
-    return classes.filter(Boolean).join(" ");
-  };
-
+const PlayerPage = ({ params }: PageProps) => {
   return (
     <>
       <div className="relative isolate overflow-hidden bg-gray-900 pt-10">
@@ -37,10 +25,10 @@ const page = ({ params }: PageProps) => {
           </div>
         </div>
         {/* MATCHES */}
-                  <PlayerMatches />
+        <PlayerMatches />
       </div>
     </>
   );
 };
 
-export default page;
+export default PlayerPage;

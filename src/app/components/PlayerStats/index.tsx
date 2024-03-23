@@ -1,3 +1,5 @@
+"use client";
+
 import { useFaceitData } from "../../providers";
 import { Key, useEffect, useState } from "react";
 import { classNames, countTimePostMatch, getAvarageStats } from "@/app/utils/helpers";
@@ -27,7 +29,7 @@ const PlayerStats = () => {
 
   return (
     <>
-      <div className="bg-gray-900 px-8 py-4 rounded-xl opacity-100 border border-white border-opacity-10 outline-red-600 outline-4">
+      <div className="bg-gray-900 px-8 py-4 rounded-xl opacity-100 border border-white border-opacity-10 min-h-[29rem]">
         <div className="mx-auto max-w-7xl ">
           {statsPeriod === "lifetime" && faceitData.fullTimeStats?.lifetime && (
             <div className="grid grid-cols-1 gap-px bg-white/5 sm:grid-cols-2 lg:grid-cols-2">
@@ -151,93 +153,7 @@ const PlayerStats = () => {
       </div>
 
 
-      <li className="player-details-extended rounded-2xl bg-gray-800 px-8 py-4 col-span-2 opacity-80 transition-opacity duration-300 hover:opacity-100 grid grid-cols-5 grid-rows-4 justify-items-center items-center text-sm text-left pl-5 leading-6 text-gray-400">
-        {faceitData.fullTimeStats?.lifetime ? (
-          <>
 
-            <div className="flex h-20 w-24 flex-col items-center justify-center rounded-md border border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80 text-center">
-              Matches:{" "}
-              <span className="font-light">
-                {faceitData.fullTimeStats.lifetime.Matches}
-              </span>
-            </div>
-            <div className="flex h-20 w-24 flex-col items-center justify-center rounded-md border border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80 text-center">
-              Recent Results:
-              <span className="font-light">
-                {faceitData.fullTimeStats.lifetime["Recent Results"]?.map(
-                  (result, index) => (
-                    <span
-                      key={index}
-                      className={classNames(
-                        result === "1"
-                          ? "text-green-400"
-                          : "text-red-400",
-                        "ml-1"
-                      )}
-                    >
-                      {result === "1" ? "W" : "L"}
-                    </span>
-                  )
-                )}
-              </span>
-            </div>
-            <div className="flex h-20 w-24 flex-col items-center justify-center rounded-md border border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80 text-center">
-              Win Rate:{" "}
-              <span className="font-light">
-                {faceitData.fullTimeStats.lifetime["Win Rate %"]}%
-              </span>
-            </div>
-            <div className="flex h-20 w-24 flex-col items-center justify-center rounded-md border border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80 text-center">
-              Avg KDR:{" "}
-              <span className="font-light">
-                {faceitData.fullTimeStats.lifetime["Average K/D Ratio"]}
-              </span>
-            </div>
-            <div className="flex h-20 w-24 flex-col items-center justify-center rounded-md border border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80 text-center">
-              Avg HS %:{" "}
-              <span className="font-light">
-                {faceitData.fullTimeStats.lifetime["Average Headshots %"]}
-              </span>
-            </div>
-
-
-            <div className="flex h-20 w-24 flex-col items-center justify-center rounded-md border border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80 text-center">
-              Avg Kills :{" "}
-              <span className="font-light">
-                {avarageStats ? avarageStats.Kills : '?'}
-              </span>
-            </div>
-            <div className="flex h-20 w-24 flex-col items-center justify-center rounded-md border border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80 text-center">
-              Win Rate :{" "}
-              <span className="font-light">
-                {avarageStats ? avarageStats["Win Rate %"] : '?'}
-                %
-              </span>
-            </div>
-            <div className="flex h-20 w-24 flex-col items-center justify-center rounded-md border border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80 text-center">
-              Avg K/D:{" "}
-              <span className="font-light" onClick={() => getAvarageStats(faceitData.matchLatestStats)}>
-                {avarageStats ? avarageStats["K/D Ratio"].toFixed(2) : '?'}
-              </span>
-            </div>
-            <div className="flex h-20 w-24 flex-col items-center justify-center rounded-md border border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80 text-center">
-              WinStreak:{" "}
-              <span className="font-light">
-
-                x
-              </span>
-            </div>
-            <div className="flex h-20 w-24 flex-col items-center justify-center rounded-md border border-dashed border-gray-200 transition-colors duration-100 ease-in-out hover:border-gray-400/80 text-center">
-              HS %
-              <span className="font-light">
-                {avarageStats ? avarageStats["Headshots %"].toFixed(2) : '?'}
-              </span>
-            </div>
-          </>
-        ) : (
-          <p>Loading...</p>
-        )}
-      </li>
     </>
   )
 }

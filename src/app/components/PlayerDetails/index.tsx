@@ -19,13 +19,31 @@ const PlayerDetails = ({ params }: PageProps) => {
   }, []);
 
   return (
-    <div>
-      <li
+    <>
+
+<div className="player-details rounded-2xl bg-gray-800 px-8 py-10 min-h-[29rem]">
+      <h3 className="text-base font-semibold leading-6 text-gray-900">Last 30 days</h3>
+      <dl className="mt-5 flex flex-col gap-4">
+        <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+          <dt className="truncate text-sm font-medium text-gray-500">Total Subscribers</dt>
+          <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">71,897</dd>
+        </div>
+        <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+          <dt className="truncate text-sm font-medium text-gray-500">Avg. Open Rate</dt>
+          <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">58.16%</dd>
+        </div>
+        <div className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+          <dt className="truncate text-sm font-medium text-gray-500">Avg. Click Rate</dt>
+          <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">24.57%</dd>
+        </div>
+      </dl>
+    </div>
+
+      {/* <li
         key={faceitData.foundPlayerDetails.nickname}
-        className="player-details rounded-2xl bg-gray-800 px-8 py-10"
+        className="player-details rounded-2xl bg-gray-800 px-8 py-10 min-h-[29rem]"
       >
         <div className='rounded-md p-3 relative' >
-
           <div className="faceit-background w-full h-full absolute top-0 left-0 rounded-md opacity-5" style={{ backgroundImage: `url(${faceitData.foundPlayerDetails.cover_image})` }}></div>
           <Image
             className="mx-auto  rounded-full"
@@ -93,9 +111,9 @@ const PlayerDetails = ({ params }: PageProps) => {
             </Link>
           </li>
         </ul>
-      </li>
+      </li> */}
 
-    </div>
+    </>
   );
 };
 

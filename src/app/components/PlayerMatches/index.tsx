@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { useFaceitData } from "../../providers";
 import { useEffect } from "react";

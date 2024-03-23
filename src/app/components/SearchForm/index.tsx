@@ -110,7 +110,7 @@ const SearchForm = () => {
                     leaveTo="opacity-0"
                     key={index}
                   >
-                    <Link href={`/player-info/${player.nickname}`}>
+                    <Link href={`/player/${player.nickname}`}>
                       <div
                         className="bg-slate-900 bg-opacity-50 text-sm text-white  flex align-center items-center  rounded-md px-2 cursor-pointer hover:bg-gray-200 transition-all ease-in-out duration-300 mt-2 hover:opacity-80 hover:text-black hover:font-bold max-h-10 w-56"
                         key={index}
