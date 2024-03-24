@@ -6,6 +6,7 @@ import API_TOKEN from "../utils/config";
 const FaceitDataContext = createContext<FaceitDataContextType>({
   inputNickname: "",
   faceitData: {},
+  setFaceitData: () => {},
   setInputNickname: () => {},
   fetchPlayerSearch: async () => {},
   fetchPlayerData: async () => {},
@@ -31,12 +32,10 @@ export const FaceitDataProvider = ({ children }: FaceitDataProviderProps) => {
   });
 
   const fetchPlayerSearch = async (nickname: string) => {
-    if (inputNickname || nickname) {
+    if (nickname) {
       try {
         const response: AxiosResponse = await axios.get(
-          `https://open.faceit.com/data/v4/search/players?nickname=${
-            inputNickname || nickname
-          }&offset=0&limit=20`,
+          `https://open.faceit.com/data/v4/search/players?nickname=${nickname}&offset=0&limit=20`,
           {
             headers: {
               Authorization: `Bearer ${API_TOKEN}`,
@@ -46,7 +45,6 @@ export const FaceitDataProvider = ({ children }: FaceitDataProviderProps) => {
         setFaceitData((prevData) => ({
           ...prevData,
           searchPlayerList: response.data,
-          isLoading: false,
         }));
       } catch (error) {
         setFaceitData((prevData) => ({
@@ -70,7 +68,6 @@ export const FaceitDataProvider = ({ children }: FaceitDataProviderProps) => {
       setFaceitData((prevData) => ({
         ...prevData,
         foundPlayerDetails: response.data,
-        isLoading: false,
       }));
     } catch (error) {
       throw new Error("There was an error fetching the data");
@@ -97,7 +94,6 @@ export const FaceitDataProvider = ({ children }: FaceitDataProviderProps) => {
         setFaceitData((prevData) => ({
           ...prevData,
           matchHistory: response.data,
-          isLoading: false,
         }));
       } catch (error) {
         throw new Error("There was an error fetching the data");
@@ -125,7 +121,6 @@ export const FaceitDataProvider = ({ children }: FaceitDataProviderProps) => {
         setFaceitData((prevData) => ({
           ...prevData,
           matchLatestStats: response.data,
-          isLoading: false,
         }));
       } catch (error) {
         throw new Error("There was an error fetching the data");
@@ -149,7 +144,6 @@ export const FaceitDataProvider = ({ children }: FaceitDataProviderProps) => {
         setFaceitData((prevData) => ({
           ...prevData,
           fullTimeStats: response.data,
-          isLoading: false,
         }));
       } catch (error) {
         throw new Error("There was an error fetching the data");
@@ -165,6 +159,7 @@ export const FaceitDataProvider = ({ children }: FaceitDataProviderProps) => {
         fetchMatchesHistory,
         fetchLatestMatchesPlayerStats,
         faceitData,
+        setFaceitData,
         inputNickname,
         setInputNickname,
         fetchPlayerFulltimeStats,

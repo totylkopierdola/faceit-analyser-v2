@@ -1,13 +1,17 @@
 "use client";
 import Link from "next/link";
-import { useFaceitData } from "../../providers";
+import { useFaceitData } from "../../../providers";
 import { useEffect } from "react";
 import { countTimePostMatch } from "@/app/utils/helpers";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
-
 const PlayerMatches = () => {
-  const { faceitData, fetchPlayerData, fetchMatchesHistory, fetchLatestMatchesPlayerStats } = useFaceitData();
+  const {
+    faceitData,
+    fetchPlayerData,
+    fetchMatchesHistory,
+    fetchLatestMatchesPlayerStats,
+  } = useFaceitData();
   const faceit_player_id = faceitData.foundPlayerDetails.player_id;
 
   useEffect(() => {
@@ -17,9 +21,12 @@ const PlayerMatches = () => {
 
   return (
     <div className="relative isolate overflow-hidden  py-10 px-80">
-      <h1 className="text-2xl" onClick={() => {
-        console.log(faceitData)
-      }}>
+      <h1
+        className="text-2xl"
+        onClick={() => {
+          console.log(faceitData);
+        }}
+      >
         {/* {faceit_player_id} */}
         xdd
       </h1>
@@ -96,7 +103,7 @@ const PlayerMatches = () => {
               </thead>
               <tbody className="divide-y divide-white/5">
                 {faceitData.matchLatestStats.items.map((match, matchIndex) => (
-                  <tr key={matchIndex} >
+                  <tr key={matchIndex}>
                     <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
                       <div className="flex items-center ">
                         {match?.stats?.Result === "1" ? (
@@ -110,7 +117,11 @@ const PlayerMatches = () => {
                         )}
                         <div className="truncate text-sm leading-6 text-white font-extrabold flex items-center gap-2">
                           {match.stats.Team}
-                          <Link href="https://www.faceit.com/en/cs2/room/1-916138f3-dd58-46e0-8d77-5143c64b47c2" passHref target="_blank">
+                          <Link
+                            href="https://www.faceit.com/en/cs2/room/1-916138f3-dd58-46e0-8d77-5143c64b47c2"
+                            passHref
+                            target="_blank"
+                          >
                             <FaExternalLinkAlt className="cursor-pointer" />
                           </Link>
                         </div>
@@ -154,14 +165,13 @@ const PlayerMatches = () => {
                     </td>
                   </tr>
                 ))}
-
               </tbody>
             </table>{" "}
           </div>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default PlayerMatches
+export default PlayerMatches;

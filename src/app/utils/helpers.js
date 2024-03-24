@@ -1,4 +1,3 @@
-
 const classNames = (...classes) => {
   return classes.filter(Boolean).join(" ");
 };
@@ -52,7 +51,7 @@ const countTimePostMatch = (matchDate) => {
   }
 };
 
-  // {
+// {
 //   "items": [
 //     {
 //       "stats": {
@@ -133,8 +132,11 @@ const countTimePostMatch = (matchDate) => {
 
 // every item is a match. i want to get an avarage of every stat from all these matches (20 of them)
 
-
 const getAvarageStats = (data) => {
+  if (data.length === 0) {
+    return {};
+  }
+
   let assistsTotal = 0;
   let kDRatioTotal = 0;
   let quadroKillsTotal = 0;
@@ -156,23 +158,23 @@ const getAvarageStats = (data) => {
   const matches = data.items;
 
   // Iterate through each match
-  matches.forEach(match => {
+  matches.forEach((match) => {
     const stats = match.stats;
     // Accumulate values for each stat
     assistsTotal += parseInt(stats.Assists);
-    kDRatioTotal += parseFloat(stats['K/D Ratio']);
-    quadroKillsTotal += parseInt(stats['Quadro Kills']);
-    bestOfTotal += parseInt(stats['Best Of']);
-    firstHalfScoreTotal += parseInt(stats['First Half Score']);
-    secondHalfScoreTotal += parseInt(stats['Second Half Score']);
-    tripleKillsTotal += parseInt(stats['Triple Kills']);
+    kDRatioTotal += parseFloat(stats["K/D Ratio"]);
+    quadroKillsTotal += parseInt(stats["Quadro Kills"]);
+    bestOfTotal += parseInt(stats["Best Of"]);
+    firstHalfScoreTotal += parseInt(stats["First Half Score"]);
+    secondHalfScoreTotal += parseInt(stats["Second Half Score"]);
+    tripleKillsTotal += parseInt(stats["Triple Kills"]);
     mvpTotal += parseInt(stats.MVPs);
     headshotsTotal += parseInt(stats.Headshots);
-    finalScoreTotal += parseInt(stats['Final Score']);
-    pentaKillsTotal += parseInt(stats['Penta Kills']);
-    overtimeScoreTotal += parseInt(stats['Overtime score']);
+    finalScoreTotal += parseInt(stats["Final Score"]);
+    pentaKillsTotal += parseInt(stats["Penta Kills"]);
+    overtimeScoreTotal += parseInt(stats["Overtime score"]);
     roundsTotal += parseInt(stats.Rounds);
-    headshotsPercentTotal += parseInt(stats['Headshots %']);
+    headshotsPercentTotal += parseInt(stats["Headshots %"]);
     killsTotal += parseInt(stats.Kills);
     deathsTotal += parseInt(stats.Deaths);
     // Increment win count if the result is '1'
@@ -205,12 +207,11 @@ const getAvarageStats = (data) => {
     Kills: killsTotal / totalCount,
     Deaths: deathsTotal / totalCount,
     "Win Rate": (winCount / totalCount) * 100, // Calculate win rate
-    "KPR": kpr // Kills Per Round
+    KPR: kpr, // Kills Per Round
   };
 
   console.log(averages);
   return averages;
 };
-
 
 export { formatDate, countTimePostMatch, classNames, getAvarageStats };

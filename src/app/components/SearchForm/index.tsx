@@ -11,7 +11,6 @@ const SearchForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { faceitData, fetchPlayerSearch, inputNickname, setInputNickname } =
     useFaceitData();
-  const [searchedPlayersData, setSearchedPlayersData] = useState([]);
   const [enterPage, setEnterPage] = useState(false);
 
   const debouncedSearch: string = useDebounce(inputNickname, 500);
@@ -22,18 +21,26 @@ const SearchForm = () => {
       inputRef.current.focus();
     }
 
+    const asyncFetchPlayerSearch = async (inputNickname) => {
+      await fetchPlayerSearch(inputNickname);
+    };
+
     if (debouncedSearch) {
-      fetchPlayerSearch();
+      // fetchPlayerSearch(inputNickname);
+      asyncFetchPlayerSearch(inputNickname);
     }
   }, [debouncedSearch]);
 
+  useEffect(() => {}, [faceitData]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputNickname(e.target.value);
+    console.log("inputNickname", inputNickname);
   };
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetchPlayerSearch();
+    fetchPlayerSearch(inputNickname);
   };
 
   return (
@@ -48,12 +55,6 @@ const SearchForm = () => {
         ]
       </div>
       <h1 className="text-xs">inputNickname: {inputNickname}</h1>
-      <button
-        className="border-4 border-white text-xs"
-        onClick={() => console.log(searchedPlayersData)} // Assuming you want to log searchedPlayersData
-      >
-        searchedPlayersData
-      </button>
       <button
         className="border-4 border-white text-xs"
         onClick={() => console.log("faceitData", faceitData)}
@@ -95,7 +96,7 @@ const SearchForm = () => {
             </button>
           </div>
 
-          {inputNickname && (
+          {inputNickname && faceitData ? (
             <div className="absolute top-[40px] search-results h-52 overflow-y-scroll overflow-x-hidden  max-w-80 no-scrollbar">
               {faceitData.searchPlayerList.items &&
                 faceitData.searchPlayerList.items.map((player, index) => (
@@ -149,16 +150,10 @@ const SearchForm = () => {
                   </Transition>
                 ))}
             </div>
+          ) : (
+            <h1 className="6xl text-white">No results</h1>
           )}
         </div>
-
-        {/* <p className="mt-4 text-sm leading-6 text-gray-300">
-          We care about your data. Read our{" "}
-          <Link href="#" className="font-semibold text-white">
-            privacy&nbsp;policy
-          </Link>
-          .
-        </p> */}
       </form>
     </>
   );

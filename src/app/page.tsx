@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-// "use client";
-
 import Image from "next/image";
 import BackgroundShapes from "./components/BackgroundShapes";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";

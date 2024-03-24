@@ -1,6 +1,6 @@
 "use client";
 
-import { useFaceitData } from "../../providers";
+import { useFaceitData } from "../../../providers";
 import { Key, useEffect, useState } from "react";
 import {
   classNames,
@@ -9,25 +9,12 @@ import {
 } from "@/app/utils/helpers";
 
 const PlayerStats = () => {
-  const { faceitData, fetchPlayerFulltimeStats } = useFaceitData();
+  const { faceitData } = useFaceitData();
   const [statsPeriod, setStatsPeriod] = useState("lifetime");
-  const [loading, setLoading] = useState(true);
   const [avarageStats, setAvarageStats] = useState(null);
 
-  const faceit_player_id = faceitData.foundPlayerDetails.player_id;
-
   useEffect(() => {
-    fetchPlayerFulltimeStats(faceit_player_id);
-  }, [faceit_player_id]);
-
-  useEffect(() => {
-    if (faceitData) {
-      setLoading(false);
-    }
-    if (faceitData.matchLatestStats.items) {
-      setAvarageStats(getAvarageStats(faceitData.matchLatestStats));
-      console.log(avarageStats);
-    }
+    setAvarageStats(getAvarageStats(faceitData.matchLatestStats));
   }, [faceitData]);
 
   return (
