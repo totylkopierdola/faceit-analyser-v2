@@ -16,6 +16,16 @@
   }
 }
 
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -36,7 +46,6 @@ body {
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
-
 
     /* Hide scrollbar for IE, Edge, and Firefox */
     .no-scrollbar {

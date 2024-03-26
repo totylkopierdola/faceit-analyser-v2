@@ -23,11 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${play.className}`}>
-        <FaceitDataProvider>
-          <Navbar />
-          {children}
-        </FaceitDataProvider>
+      <body className={`${play.className} overflow-y-scroll no-scrollbar`}>
+        <Navbar />
+        <FaceitDataProvider>{children}</FaceitDataProvider>
       </body>
     </html>
   );

@@ -15,14 +15,14 @@ const PlayerStats = () => {
 
   useEffect(() => {
     setAvarageStats(getAvarageStats(faceitData.matchLatestStats));
-  }, [faceitData]);
+  }, [faceitData, statsPeriod]);
 
   return (
     <>
-      <div className="bg-gray-900 px-8 py-4 rounded-xl opacity-100 shadow-2xl  min-h-[29rem]">
+      <div className="flex items-center bg-gray-900 px-8 py-4 rounded-xl opacity-100 shadow-2xl  min-h-[29rem]">
         <div className="mx-auto max-w-7xl ">
           {statsPeriod === "lifetime" && faceitData.fullTimeStats?.lifetime && (
-            <div className="grid grid-cols-1 gap-px bg-white/5 sm:grid-cols-2 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-px bg-white/5 sm:grid-cols-2 lg:grid-cols-2 ease-in-out  transition-opacity duration-300">
               <div className="bg-gray-900 px-4 py-6 sm:px-6 lg:px-8">
                 <p className="text-sm font-medium leading-6 text-gray-400">
                   Matches:{" "}
@@ -53,7 +53,6 @@ const PlayerStats = () => {
                       )
                     )}
                   </span>
-                  {/* <span className="text-sm text-gray-400">mins</span> */}
                 </p>
               </div>
               <div className="bg-gray-900 px-4 py-6 sm:px-6 lg:px-8">

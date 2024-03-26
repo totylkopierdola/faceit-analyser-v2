@@ -11,7 +11,7 @@ import SearchForm from "./components/SearchForm";
 
 export default function Home() {
   return (
-    <div className="relative isolate overflow-hidden bg-gray-900 h-[100vh]">
+    <div className="relative isolate overflow-hidden bg-gray-900 h-[calc(100vh-4rem)]">
       <BackgroundShapes color="bg-orange-500" opacity="opacity-20" />
       <div className="mx-auto px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-26 justify-center">
         <div className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">

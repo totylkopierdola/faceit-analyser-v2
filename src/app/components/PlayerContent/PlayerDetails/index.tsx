@@ -3,7 +3,7 @@ import ReactCountryFlag from "react-country-flag";
 import Image from "next/image";
 import Link from "next/link";
 import { useFaceitData } from "../../../providers";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { formatDate } from "../../../utils/helpers";
 import { FaSteam } from "react-icons/fa";
 import { SiFaceit } from "react-icons/si";
@@ -26,21 +26,22 @@ const PlayerDetails = () => {
         <dl className="mt-5 flex flex-col gap-4">
           <div className="overflow-hidden rounded-lg bg-slate-800 px-4 py-5 shadow-2xl sm:p-6">
             <dt className="truncate text-sm font-medium text-gray-50">
-              <div className="flex justify-center">
-                <Image
-                  className="mx-auto  rounded-full"
-                  width={100}
-                  height={100}
-                  priority={true}
-                  src={
-                    faceitData.foundPlayerDetails.avatar
-                      ? faceitData.foundPlayerDetails.avatar
-                      : "https://distribution.faceit-cdn.net/images/97baac26-41cb-469a-abf3-94d67b914897.jpeg"
-                  }
-                  alt=""
-                />
-                <div className="flex flex-col flex-start items-start gap-2">
-                  <h3 className="mt-6 text-2xl font-semibold leading-7 tracking-tight text-gray-50">
+              <div className="sm:flex sm:justify-center sm:flex-row sm:gap-4  flex flex-col items-center">
+                <div className="sm:size-28 size-28 relative">
+                  <Image
+                    className="mx-auto rounded-full "
+                    fill
+                    priority={true}
+                    src={
+                      faceitData.foundPlayerDetails.avatar
+                        ? faceitData.foundPlayerDetails.avatar
+                        : "https://distribution.faceit-cdn.net/images/97baac26-41cb-469a-abf3-94d67b914897.jpeg"
+                    }
+                    alt=""
+                  />
+                </div>
+                <div className="sm:flex sm:flex-col sm:flex-start sm:items-start gap-2 ">
+                  <h3 className="mt-6 sm:text-2xl font-semibold leading-7 tracking-tight text-gray-50">
                     {faceitData.foundPlayerDetails.nickname}
                     <ReactCountryFlag
                       className="ml-3 text-xl"

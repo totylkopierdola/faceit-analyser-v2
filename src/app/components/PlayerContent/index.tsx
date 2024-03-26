@@ -29,23 +29,22 @@ const PlayerContent = ({ params }: PageProps) => {
       await fetchPlayerSearch(nickname);
       await fetchLatestMatchesPlayerStats(faceit_player_id, 20);
       await fetchMatchesHistory(faceit_player_id, 20);
-
-      await setFaceitData((prevData) => ({
-        ...prevData,
-        isLoading: false,
-      }));
     };
 
     fetchEntireData(nickname);
+
+    setTimeout(() => {
+      setFaceitData((prevData) => ({
+        ...prevData,
+        isLoading: false,
+      }));
+    }, 2000);
   }, [faceitData.isLoading, faceitData.foundPlayerDetails.player_id]);
 
   return (
     <>
       {faceitData.isLoading ? (
-        // {1 == 1 ? (
-        <div className="bg-black bg-opacity-80 left-0 top-0 w-screen h-screen z-10  flex items-center justify-center">
-          <div className=" w-12 h-12 border-4 border-gray-300 border-t-[red] rounded-full animate-spin z-50"></div>
-        </div>
+        <Loader />
       ) : (
         <>
           <div className="relative isolate overflow-hidden  pt-10">
@@ -58,13 +57,13 @@ const PlayerContent = ({ params }: PageProps) => {
               <div className="mx-auto max-w-5xl px-6 text-center lg:px-8">
                 <ul
                   role="list"
-                  className="mx-auto mt-10 grid max-w-2xl grid-cols-3 gap-6 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:gap-8"
+                  className="mx-auto mt-10 grid max-w-2xl  gap-6 sm:grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:gap-8"
                 >
                   <PlayerDetails />
                   <PlayerStats />
-                  <PlayerMatches />
                 </ul>
               </div>
+              <PlayerMatches />
             </div>
           </div>
         </>
