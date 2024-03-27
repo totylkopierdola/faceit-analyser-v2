@@ -31,6 +31,7 @@ const PlayerDetails = () => {
                   <Image
                     className="mx-auto rounded-full "
                     fill
+                    sizes="100px"
                     priority={true}
                     src={
                       faceitData.foundPlayerDetails.avatar
@@ -67,16 +68,25 @@ const PlayerDetails = () => {
           <div className="overflow-hidden rounded-lg bg-slate-800 px-4 py-5 shadow sm:p-6">
             <dt className="truncate text-sm font-medium text-gray-50">
               <div className="flex justify-center  gap-4">
-                <Image
-                  src={`https://beta.leetify.com/assets/images/rank-icons/faceit${faceitData.foundPlayerDetails.games?.cs2?.skill_level}.svg`}
-                  alt=""
-                  width={70}
-                  height={70}
-                />
-                <div className="text-4xl text-left leading-10 text-gray-50 font-bold flex flex-col items-center justify-center">
-                  {faceitData.foundPlayerDetails.games?.cs2?.faceit_elo} <br />
-                  <span className="text-sm text-center">ELO</span>
-                </div>
+                {faceitData.foundPlayerDetails.games.cs2 ? (
+                  <>
+                    <Image
+                      src={`https://beta.leetify.com/assets/images/rank-icons/faceit${faceitData.foundPlayerDetails.games.cs2.skill_level}.svg`}
+                      alt=""
+                      width={70}
+                      height={70}
+                    />{" "}
+                    <div className="text-4xl text-left leading-10 text-gray-50 font-bold flex flex-col items-center justify-center">
+                      {faceitData.foundPlayerDetails.games?.cs2?.faceit_elo}{" "}
+                      <br />
+                      <span className="text-sm text-center">ELO</span>
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-4xl text-left leading-10 text-gray-50 font-bold flex flex-col items-center justify-center">
+                    <span className="text-sm text-center">No data</span>
+                  </div>
+                )}
               </div>
             </dt>
           </div>
@@ -93,14 +103,16 @@ const PlayerDetails = () => {
                 </Link>
               </span>
               <span className="flex items-center gap-2 ">
-                <Link
-                  href={`https://steamcommunity.com/profiles/${faceitData.foundPlayerDetails.steam_id_64}`}
-                  className="text-gray-400 hover:text-gray-300 flex items-center gap-2 hover:opacity:50 cursor-pointer"
-                  target="_blank"
-                >
-                  <FaSteam />
-                  STEAM
-                </Link>
+                {faceitData.foundPlayerDetails.steam_id_64 && (
+                  <Link
+                    href={`https://steamcommunity.com/profiles/${faceitData.foundPlayerDetails.steam_id_64}`}
+                    className="text-gray-400 hover:text-gray-300 flex items-center gap-2 hover:opacity:50 cursor-pointer"
+                    target="_blank"
+                  >
+                    <FaSteam />
+                    STEAM
+                  </Link>
+                )}
               </span>
             </dt>
           </div>

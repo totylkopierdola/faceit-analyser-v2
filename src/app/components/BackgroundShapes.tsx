@@ -19,7 +19,7 @@ const BackgroundShapes = (props, loader) => {
           src="/images/wallpaperflare.com_wallpaper.jpg"
           alt="background"
           fill
-          className=" opacity-[0.05] grayscale"
+          className=" opacity-5 grayscale "
         />
         <svg
           className="inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"

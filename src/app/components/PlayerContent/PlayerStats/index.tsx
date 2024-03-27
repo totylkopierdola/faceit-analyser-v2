@@ -21,6 +21,9 @@ const PlayerStats = () => {
     <>
       <div className="flex items-center bg-gray-900 px-8 py-4 rounded-xl opacity-100 shadow-2xl  min-h-[29rem]">
         <div className="mx-auto max-w-7xl ">
+          {!faceitData.fullTimeStats && (
+            <h3 className="text-3xl font-bold  text-white ">No data</h3>
+          )}
           {statsPeriod === "lifetime" && faceitData.fullTimeStats?.lifetime && (
             <div className="grid grid-cols-1 gap-px bg-white/5 sm:grid-cols-2 lg:grid-cols-2 ease-in-out  transition-opacity duration-300">
               <div className="bg-gray-900 px-4 py-6 sm:px-6 lg:px-8">

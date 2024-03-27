@@ -20,7 +20,7 @@ const PlayerMatches = () => {
   }, [faceit_player_id]);
 
   return (
-    <div className="relative isolate overflow-hidden  py-10 mx-auto lg:max-w-7xl">
+    <div className="relative isolate overflow-hidden  py-10 mx-auto lg:max-w-7xl mt-8">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
           Matches
@@ -32,7 +32,7 @@ const PlayerMatches = () => {
 
       {/*  */}
 
-      <div className="min-h-screen">
+      <div className="min-h-screen mt-8">
         {faceitData.matchLatestStats?.items && (
           <div className="flex flex-col mx-4">
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -95,6 +95,27 @@ const PlayerMatches = () => {
                       </tr>
                     </thead>
                     <tbody>
+                      {/* NO MATCHES FOUND*/}
+                      {faceitData.matchLatestStats.items ? (
+                        <tr className="border-b dark:border-neutral-500">
+                          <td
+                            colSpan={10}
+                            className="text-center text-white text-lg"
+                          >
+                            No matches found
+                          </td>
+                        </tr>
+                      ) : (
+                        <tr className="border-b dark:border-neutral-500">
+                          <td
+                            colSpan={10}
+                            className="text-center text-white text-lg"
+                          >
+                            No matches found
+                          </td>
+                        </tr>
+                      )}
+                      {/* FOUND MATCHES */}
                       {faceitData.matchLatestStats.items.map(
                         (match, matchIndex) => (
                           <Fragment key={matchIndex}>
