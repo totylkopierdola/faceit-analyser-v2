@@ -19,7 +19,6 @@ const Navbar = () => {
 
   useEffect(() => {
     setAnimate(true);
-    console.log("nav", faceitData);
   }, []);
 
   // check the url of the page is the homepage

@@ -6,29 +6,34 @@ import { useFaceitData } from "../../providers";
 import { Transition } from "@headlessui/react";
 import Image from "next/image";
 import useDebounce from "../../hooks/useDebounce";
+import { useTimeoutFn } from "react-use";
 
 const SearchForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { faceitData, fetchPlayerSearch, inputNickname, setInputNickname } =
     useFaceitData();
-  const [enterPage, setEnterPage] = useState(false);
+  const [isShowing, setIsShowing] = useState(false);
 
   const debouncedSearch: string = useDebounce(inputNickname, 500);
 
+  let [, , resetIsShowing] = useTimeoutFn(() => setIsShowing(true), 500);
+
   useEffect(() => {
-    setEnterPage(true);
     if (inputRef.current) {
       inputRef.current.focus();
     }
 
     const asyncFetchPlayerSearch = async (inputNickname) => {
       await fetchPlayerSearch(inputNickname);
+      // setIsShowing(true);
     };
 
     if (debouncedSearch) {
-      // fetchPlayerSearch(inputNickname);
       asyncFetchPlayerSearch(inputNickname);
     }
+
+    setIsShowing(false);
+    resetIsShowing();
   }, [debouncedSearch]);
 
   useEffect(() => {}, [faceitData]);
@@ -45,33 +50,6 @@ const SearchForm = () => {
 
   return (
     <>
-      <div className="flex">
-        [
-        {inputNickname && (
-          <ul>
-            <li>{inputNickname}</li>
-          </ul>
-        )}
-        ]
-      </div>
-      <h1 className="text-xs">inputNickname: {inputNickname}</h1>
-      <button
-        className="border-4 border-white text-xs"
-        onClick={() => console.log("faceitData", faceitData)}
-      >
-        faceitData
-      </button>
-      <button
-        className="border-4 border-white text-xs"
-        onClick={() =>
-          console.log(
-            "faceitData.searchPlayerList",
-            faceitData.searchPlayerList
-          )
-        }
-      >
-        faceitData.searchPlayerList
-      </button>
       <form
         className="w-full max-w-md lg:col-span-5 lg:pt-2"
         onSubmit={handleSearch}
@@ -96,26 +74,26 @@ const SearchForm = () => {
             </button>
           </div>
 
-          {inputNickname && faceitData ? (
+          {inputNickname && (
             <div className="absolute top-[40px] search-results h-52 overflow-y-scroll overflow-x-hidden  max-w-80 no-scrollbar">
-              {faceitData.searchPlayerList.items &&
-                faceitData.searchPlayerList.items.map((player, index) => (
-                  <Transition
-                    as={Fragment}
-                    show={enterPage}
-                    enter="transition-opacity duration-1000"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="transition-opacity duration-1000"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                    key={index}
-                  >
-                    <Link href={`/player/${player.nickname}`}>
-                      <div
-                        className="bg-slate-900 bg-opacity-50 text-sm text-white  flex align-center items-center  rounded-md px-2 cursor-pointer hover:bg-gray-200 transition-all ease-in-out duration-300 mt-2 hover:opacity-80 hover:text-black hover:font-bold max-h-10 w-56"
-                        key={index}
-                      >
+              {faceitData?.searchPlayerList?.items?.map((player, index) => (
+                <Transition
+                  as={Fragment}
+                  show={isShowing}
+                  enter="transition-opacity duration-200"
+                  enterFrom="opacity-0"
+                  enterTo="opacity-100"
+                  leave="transition-opacity duration-200"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                  key={index}
+                >
+                  <Link href={`/player/${player.nickname}`}>
+                    <div
+                      className="bg-slate-900 bg-opacity-50 text-sm text-white  flex align-center items-center  rounded-md px-2 cursor-pointer hover:bg-gray-200 transition-all ease-in-out duration-300 mt-2 hover:opacity-80 hover:text-black hover:font-bold max-h-10 w-56"
+                      key={index}
+                    >
+                      <>
                         <span>
                           {player.status === "AVAILABLE" ? (
                             <div className="bg-green-500 rounded-full w-2 h-2"></div>
@@ -145,13 +123,19 @@ const SearchForm = () => {
                             svg
                           />
                         </span>
-                      </div>
-                    </Link>
-                  </Transition>
-                ))}
+                      </>
+                    </div>
+                  </Link>
+                </Transition>
+              ))}
+              {faceitData.searchPlayerList?.items?.length === 0 && (
+                <div className="bg-slate-900 bg-opacity-50 text-sm text-white  flex align-center items-center  rounded-md px-2 cursor-pointer hover:bg-gray-200 transition-all ease-in-out duration-300 mt-2 hover:opacity-80 hover:text-black hover:font-bold max-h-10 w-56 h-10">
+                  <span className="px-2 font-bold opacity-50">
+                    No results found...
+                  </span>
+                </div>
+              )}
             </div>
-          ) : (
-            <h1 className="6xl text-white">No results</h1>
           )}
         </div>
       </form>

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useFaceitData } from "../../../providers";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { countTimePostMatch } from "@/app/utils/helpers";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
@@ -21,7 +21,6 @@ const PlayerMatches = () => {
 
   return (
     <div className="relative isolate overflow-hidden  py-10 mx-auto lg:max-w-7xl">
-      <button onClick={() => console.log(faceitData)}>LOGUUUUUUUJ</button>
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
           Matches
@@ -98,7 +97,7 @@ const PlayerMatches = () => {
                     <tbody>
                       {faceitData.matchLatestStats.items.map(
                         (match, matchIndex) => (
-                          <>
+                          <Fragment key={matchIndex}>
                             <tr
                               className="border-b dark:border-neutral-500"
                               key={matchIndex}
@@ -114,10 +113,13 @@ const PlayerMatches = () => {
                                       <div className="h-1.5 w-1.5 rounded-full bg-current"></div>
                                     </div>
                                   )}
-                                  <div className="truncate text-sm leading-6 text-white font-extrabold flex items-center gap-2">
+                                  <div
+                                    className="truncate text-sm leading-6 text-white font-extrabold flex items-center gap-2"
+                                    onClick={() => console.log(faceitData)}
+                                  >
                                     {match.stats.Team}
                                     <Link
-                                      href="https://www.faceit.com/en/cs2/room/1-916138f3-dd58-46e0-8d77-5143c64b47c2"
+                                      href={`https://www.faceit.com/en/cs2/room/${match.stats["Match Id"]}`}
                                       passHref
                                       target="_blank"
                                     >
@@ -163,7 +165,7 @@ const PlayerMatches = () => {
                                 {countTimePostMatch(match.stats["Updated At"])}
                               </td>
                             </tr>
-                          </>
+                          </Fragment>
                         )
                       )}
                     </tbody>

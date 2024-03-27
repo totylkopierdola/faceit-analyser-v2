@@ -1,17 +1,24 @@
-import Image from "next/image";
+"use client";
 
-const BackgroundShapes = (props) => {
+import Image from "next/image";
+import { useFaceitData } from "@/app/providers";
+
+const BackgroundShapes = (props, loader) => {
+  const { faceitData } = useFaceitData();
+
   let color = props.color;
   let opacity = props.opacity;
   return (
     <>
-      <div className="absolute h-screen w-screen">
-        {/* put nextjs image with webp file from here "../../../public/images/cs2bg.webp" */}
+      <div
+        className={`absolute h-screen w-screen ${
+          loader === true && faceitData.isLoading && "blur-3xl"
+        }`}
+      >
         <Image
           src="/images/wallpaperflare.com_wallpaper.jpg"
           alt="background"
           fill
-          objectFit="cover"
           className=" opacity-[0.05] grayscale"
         />
         <svg

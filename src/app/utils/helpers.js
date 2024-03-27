@@ -204,9 +204,9 @@ const getAvarageStats = (data) => {
     "Overtime score": overtimeScoreTotal / totalCount,
     Rounds: roundsTotal / totalCount,
     "Headshots %": headshotsPercentTotal / totalCount,
-    Kills: killsTotal / totalCount,
+    Kills: (killsTotal / totalCount).toFixed(2),
     Deaths: deathsTotal / totalCount,
-    "Win Rate": (winCount / totalCount) * 100, // Calculate win rate
+    "Win Rate": winCount / totalCount.toFixed(2), // Calculate win rate
     KPR: kpr, // Kills Per Round
   };
 

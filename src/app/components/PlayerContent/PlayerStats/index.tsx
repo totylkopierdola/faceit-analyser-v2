@@ -106,6 +106,8 @@ const PlayerStats = () => {
                 </p>
                 <p className="mt-2 flex items-baseline gap-x-2 justify-center">
                   <span className="text-4xl font-semibold tracking-tight text-white">
+                    {/* {avarageStats.Kills} */}
+                    {/* make avarageStats.Kills decimal value */}
                     {avarageStats.Kills}
                   </span>
                 </p>

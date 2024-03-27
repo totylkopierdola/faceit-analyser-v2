@@ -4,11 +4,16 @@ import PlayerDetails from "@/app/components/PlayerContent/PlayerDetails";
 import PlayerMatches from "@/app/components/PlayerContent/PlayerMatches";
 import PlayerStats from "@/app/components/PlayerContent/PlayerStats";
 
-const PlayerPage = ({ params }: PageProps) => {
+const PlayerPage = ({ params }: PageProps, loader) => {
+  // console.log("loader", loader);
   return (
     <>
-      <div className="relative isolate overflow-hidden bg-gray-900">
+      <div
+        className="relative isolate overflow-hidden bg-gray-900"
+        onClick={console.log("loader", loader)}
+      >
         <BackgroundShapes
+          loader={true}
           color="bg-red-500"
           opacity="opacity-20"
           style={{
