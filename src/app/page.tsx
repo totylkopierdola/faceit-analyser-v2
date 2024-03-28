@@ -21,6 +21,7 @@ export default function Home() {
               <li>- live matches</li>
               <li>- faceit leaderboard</li>
               <li>- find team/player section</li>
+              <li>- Contact page (maybe modal)</li>
             </ol>
             <Link href="#" className="inline-flex space-x-6">
               <span className="rounded-full bg-indigo-500/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-400 ring-1 ring-inset ring-indigo-500/20">

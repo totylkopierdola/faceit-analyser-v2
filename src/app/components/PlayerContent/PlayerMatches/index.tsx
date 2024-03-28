@@ -32,7 +32,7 @@ const PlayerMatches = () => {
 
       {/*  */}
 
-      <div className="min-h-screen mt-8">
+      <div className="mt-8">
         {faceitData.matchLatestStats?.items && (
           <div className="flex flex-col mx-4">
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -95,25 +95,10 @@ const PlayerMatches = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {/* NO MATCHES FOUND*/}
-                      {faceitData.matchLatestStats.items ? (
-                        <tr className="border-b dark:border-neutral-500">
-                          <td
-                            colSpan={10}
-                            className="text-center text-white text-lg"
-                          >
-                            No matches found
-                          </td>
-                        </tr>
-                      ) : (
-                        <tr className="border-b dark:border-neutral-500">
-                          <td
-                            colSpan={10}
-                            className="text-center text-white text-lg"
-                          >
-                            No matches found
-                          </td>
-                        </tr>
+                      {faceitData.matchLatestStats.items?.length === 0 && (
+                        <h3 className="text-4xl text-white text-center  mt-5 opacity-50">
+                          No matches found...
+                        </h3>
                       )}
                       {/* FOUND MATCHES */}
                       {faceitData.matchLatestStats.items.map(

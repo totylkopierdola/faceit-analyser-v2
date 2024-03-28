@@ -35,7 +35,7 @@ const NewsPage = () => {
   return (
     <div className="relative isolate overflow-hidden bg-gray-900 sm:h-[calc(100vh-4rem)]">
       <BackgroundShapes loader color="bg-blue-500" opacity="opacity-5" />
-      <div className="bg-transparent py-24 sm:pt-10 relative ">
+      <div className="bg-transparent py-24 sm:pt-10 pt-12 relative ">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
             <h2

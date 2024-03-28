@@ -7,19 +7,9 @@ import { useEffect, useState } from "react";
 import { formatDate } from "../../../utils/helpers";
 import { FaSteam } from "react-icons/fa";
 import { SiFaceit } from "react-icons/si";
-import Loader from "../../Loader.tsx";
 
 const PlayerDetails = () => {
-  const { faceitData, fetchPlayerSearch, fetchPlayerData } = useFaceitData();
-
-  // useEffect(() => {
-  //   const nickname = params["player-id"];
-  //   fetchPlayerSearch(nickname);
-  //   fetchPlayerData(nickname);
-
-  //   console.log(faceitData);
-  // }, [faceitData.isLoading]);
-
+  const { faceitData } = useFaceitData();
   return (
     <>
       <div className="player-details rounded-2xl bg-gray-900 px-8 py-10 min-h-[29rem]">
@@ -68,7 +58,7 @@ const PlayerDetails = () => {
           <div className="overflow-hidden rounded-lg bg-slate-800 px-4 py-5 shadow sm:p-6">
             <dt className="truncate text-sm font-medium text-gray-50">
               <div className="flex justify-center  gap-4">
-                {faceitData.foundPlayerDetails.games.cs2 ? (
+                {faceitData.foundPlayerDetails.games?.cs2 ? (
                   <>
                     <Image
                       src={`https://beta.leetify.com/assets/images/rank-icons/faceit${faceitData.foundPlayerDetails.games.cs2.skill_level}.svg`}
