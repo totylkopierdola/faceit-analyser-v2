@@ -16,11 +16,19 @@ export default function Home() {
       <div className="mx-auto px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-26 justify-center">
         <div className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 z-10">
           <div className="mt-24 sm:mt-32 lg:mt-16">
+            <ol className="flex text-xs flex-col ">
+              <li>- news section</li>
+              <li>- live matches</li>
+              <li>- faceit leaderboard</li>
+              <li>- find team/player section</li>
+            </ol>
             <Link href="#" className="inline-flex space-x-6">
               <span className="rounded-full bg-indigo-500/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-400 ring-1 ring-inset ring-indigo-500/20">
-                What&apos;s new: [-news section -live matches -faceit
-                leaderboard]
+                What&apos;s coming:
               </span>
+              <br />
+              {/* make all these separate <p></p> tags: [-news section -live matches -faceit leaderboard -find team/player section -chat for found player] */}
+
               <span className="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-gray-300">
                 <span>v1.0</span>
                 <ChevronRightIcon

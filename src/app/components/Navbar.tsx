@@ -21,20 +21,31 @@ const Navbar = () => {
     setAnimate(true);
   }, []);
 
-  // check the url of the page is the homepage
-  const logPage = () => {
-    console.log("page", window.location.pathname === "/");
-  };
+  const menuItems = [
+    {
+      title: "HLTV News",
+      href: "/news",
+    },
+    {
+      title: "Team",
+      href: "#",
+    },
+    {
+      title: "Projects",
+      href: "#",
+    },
+    {
+      title: "Calendar",
+      href: "#",
+    },
+  ];
 
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-50">
         {({ open }) => (
           <>
-            <div
-              onClick={() => logPage()}
-              className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-            >
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex h-16 items-center justify-between">
                 <div className="absolute left-0 bottom-0 w-full h-[1px] rounded-full animate-pulse transition-transform transform origin-left opacity-5 bg-white"></div>
                 <div className="flex items-center">
@@ -47,28 +58,28 @@ const Navbar = () => {
                     <div className="flex space-x-4">
                       {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                       <Link
-                        href="#"
+                        href="/news"
                         className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
                       >
-                        Dashboard
+                        {menuItems[0].title}
                       </Link>
                       <Link
                         href="#"
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                       >
-                        Team
+                        {menuItems[1].title}
                       </Link>
                       <Link
                         href="#"
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                       >
-                        Projects
+                        {menuItems[2].title}
                       </Link>
                       <Link
                         href="#"
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                       >
-                        Calendar
+                        {menuItems[3].title}
                       </Link>
                     </div>
                   </div>
@@ -183,28 +194,28 @@ const Navbar = () => {
                   href="#"
                   className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
                 >
-                  Dashboard
+                  {menuItems[0].title}
                 </Disclosure.Button>
                 <Disclosure.Button
                   as="a"
                   href="#"
                   className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                 >
-                  Team
+                  {menuItems[1].title}
                 </Disclosure.Button>
                 <Disclosure.Button
                   as="a"
                   href="#"
                   className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                 >
-                  Projects
+                  {menuItems[2].title}
                 </Disclosure.Button>
                 <Disclosure.Button
                   as="a"
                   href="#"
                   className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                 >
-                  Calendar
+                  {menuItems[3].title}
                 </Disclosure.Button>
               </div>
               <div className="border-t border-gray-700 pb-3 pt-4">
@@ -214,6 +225,8 @@ const Navbar = () => {
                       className="h-10 w-10 rounded-full"
                       src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-profile-picture-grey-male-icon.png"
                       alt=""
+                      width={10}
+                      height={10}
                     />
                   </div>
                   <div className="ml-3">
