@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useFaceitData } from "../../providers/index";
+import { useFaceitData } from "@/context/index";
 import Loader from "../Loader.tsx";
 import PlayerDetails from "./PlayerDetails";
 import PlayerMatches from "./PlayerMatches";

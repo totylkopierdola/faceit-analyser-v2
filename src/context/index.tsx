@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext, useState, ReactNode } from "react";
 import axios, { AxiosResponse } from "axios";
-import API_TOKEN from "../utils/config";
+import API_TOKEN from "@/app/utils/config";
 
 const FaceitDataContext = createContext<FaceitDataContextType>({
   inputNickname: "",

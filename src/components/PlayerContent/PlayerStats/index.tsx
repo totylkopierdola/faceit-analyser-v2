@@ -1,6 +1,6 @@
 "use client";
 
-import { useFaceitData } from "../../../providers";
+import { useFaceitData } from "@/context";
 import { Key, useEffect, useState } from "react";
 import {
   classNames,

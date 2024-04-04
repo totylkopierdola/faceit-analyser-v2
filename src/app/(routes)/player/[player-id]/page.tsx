@@ -1,8 +1,5 @@
-import BackgroundShapes from "@/app/components/BackgroundShapes";
-import PlayerContent from "@/app/components/PlayerContent";
-import PlayerDetails from "@/app/components/PlayerContent/PlayerDetails";
-import PlayerMatches from "@/app/components/PlayerContent/PlayerMatches";
-import PlayerStats from "@/app/components/PlayerContent/PlayerStats";
+import BackgroundShapes from "@/components/BackgroundShapes";
+import PlayerContent from "@/components/PlayerContent";
 
 const PlayerPage = ({ params }: PageProps, loader) => {
   // console.log("loader", loader);

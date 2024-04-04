@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useFaceitData } from "@/app/providers";
+import { useFaceitData } from "@/context";
 
 const BackgroundShapes = (props, loader) => {
   const { faceitData } = useFaceitData();

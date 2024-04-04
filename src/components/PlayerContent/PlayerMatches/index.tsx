@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useFaceitData } from "../../../providers";
+import { useFaceitData } from "@/context";
 import { Fragment, useEffect } from "react";
 import { countTimePostMatch } from "@/app/utils/helpers";
 import { FaExternalLinkAlt } from "react-icons/fa";

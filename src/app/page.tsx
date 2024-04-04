@@ -1,13 +1,7 @@
-// @ts-nocheck
-
-import Image from "next/image";
-import BackgroundShapes from "./components/BackgroundShapes";
+import BackgroundShapes from "@/components/BackgroundShapes";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
-import { Transition } from "@headlessui/react";
 import Link from "next/link";
-import { useState, Fragment, useEffect } from "react";
-import Navbar from "./components/Navbar";
-import SearchForm from "./components/SearchForm";
+import SearchForm from "@/components/SearchForm";
 
 export default function Home() {
   return (

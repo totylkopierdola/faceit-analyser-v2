@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "./components/Navbar";
+import Navbar from "@/components/Navbar";
 import { Play } from "next/font/google";
-import { FaceitDataProvider } from "./providers";
+import { FaceitDataProvider } from "@/context";
 
 const play = Play({
   subsets: ["latin"],

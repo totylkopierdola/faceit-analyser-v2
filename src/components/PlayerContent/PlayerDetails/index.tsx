@@ -2,9 +2,9 @@
 import ReactCountryFlag from "react-country-flag";
 import Image from "next/image";
 import Link from "next/link";
-import { useFaceitData } from "../../../providers";
+import { useFaceitData } from "@/context";
 import { useEffect, useState } from "react";
-import { formatDate } from "../../../utils/helpers";
+import { formatDate } from "@/app/utils/helpers";
 import { FaSteam } from "react-icons/fa";
 import { SiFaceit } from "react-icons/si";
 

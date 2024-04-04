@@ -1,7 +1,6 @@
 "use client";
-
 import { useEffect, useState } from "react";
-import BackgroundShapes from "../components/BackgroundShapes";
+import BackgroundShapes from "@/components/BackgroundShapes";
 import axios from "axios";
 
 const NewsPage = () => {

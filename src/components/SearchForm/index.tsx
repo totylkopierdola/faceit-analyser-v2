@@ -2,10 +2,10 @@
 import ReactCountryFlag from "react-country-flag";
 import Link from "next/link";
 import { useState, useEffect, Fragment, useRef } from "react";
-import { useFaceitData } from "../../providers";
+import { useFaceitData } from "../../context";
 import { Transition } from "@headlessui/react";
 import Image from "next/image";
-import useDebounce from "../../hooks/useDebounce";
+import useDebounce from "@/hooks/useDebounce";
 import { useTimeoutFn } from "react-use";
 
 const SearchForm = () => {
